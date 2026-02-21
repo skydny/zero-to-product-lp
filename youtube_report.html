@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>歴史を面白く学ぶコテンラジオ_COTEN RADIO - YouTube Channel Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card: #1a1a2e;
+    --card2: #16213e;
+    --accent: #5bc0eb;
+    --accent2: #1a6fb5;
+    --text: #eaeaea;
+    --text2: #a0a0b0;
+    --gold: #ffd700;
+    --silver: #c0c0c0;
+    --bronze: #cd7f32;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--card) 0%, var(--card2) 100%);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border: 1px solid rgba(91,192,235,0.2);
+  }
+  .header img {
+    width: 80px; height: 80px; border-radius: 50%;
+    border: 3px solid var(--accent);
+  }
+  .header h1 { font-size: 1.8em; }
+  .header .meta { color: var(--text2); font-size: 0.95em; margin-top: 4px; }
+  .stats-bar {
+    display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap;
+  }
+  .stat-chip {
+    background: rgba(91,192,235,0.15);
+    border: 1px solid rgba(91,192,235,0.3);
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 0.9em;
+  }
+  .stat-chip strong { color: var(--accent); }
+
+  /* Section */
+  .section {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .section h2 {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+  }
+
+  /* Chart */
+  .chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+  }
+
+  /* Ranking Table */
+  .ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .ranking-table th {
+    text-align: left;
+    padding: 12px 8px;
+    color: var(--text2);
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .rank-row {
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .rank-row:hover {
+    background: rgba(91,192,235,0.1);
+  }
+  .rank-row td {
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+  }
+  .rank-num {
+    font-weight: 700;
+    font-size: 1.1em;
+    width: 60px;
+    text-align: center;
+  }
+  .rank-thumb {
+    width: 120px;
+  }
+  .rank-thumb img {
+    width: 110px;
+    border-radius: 6px;
+  }
+  .rank-title {
+    font-weight: 500;
+    max-width: 400px;
+  }
+  .rank-stat {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .rank-date {
+    color: var(--text2);
+    white-space: nowrap;
+  }
+  .rank-row:nth-child(1) .rank-num { color: var(--gold); }
+  .rank-row:nth-child(2) .rank-num { color: var(--silver); }
+  .rank-row:nth-child(3) .rank-num { color: var(--bronze); }
+
+  .footer {
+    text-align: center;
+    color: var(--text2);
+    font-size: 0.8em;
+    padding: 20px 0;
+  }
+
+  @media (max-width: 768px) {
+    .header { flex-direction: column; text-align: center; }
+    .stats-bar { justify-content: center; }
+    .chart-container { height: 300px; }
+    .rank-thumb { display: none; }
+    .rank-title { max-width: 200px; font-size: 0.9em; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <img src="https://yt3.ggpht.com/ytc/AIdro_lZOl-az7lBoUD5bNuuJHxffgbxAuSyEUmbsTzpdtoYD0w=s88-c-k-c0x00ffffff-no-rj" alt="歴史を面白く学ぶコテンラジオ_COTEN RADIO">
+    <div>
+      <h1>歴史を面白く学ぶコテンラジオ_COTEN RADIO</h1>
+      <div class="meta">YouTube Channel Analytics Report</div>
+      <div class="stats-bar">
+        <div class="stat-chip">Subscribers: <strong>188,000</strong></div>
+        <div class="stat-chip">Total Views: <strong>22,386,999</strong></div>
+        <div class="stat-chip">Analyzed: <strong>30 videos</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Count Trend -->
+  <div class="section">
+    <h2>View Count Trend</h2>
+    <div class="chart-container">
+      <canvas id="viewChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Like Count Trend -->
+  <div class="section">
+    <h2>Like Count Trend</h2>
+    <div class="chart-container">
+      <canvas id="likeChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Ranking -->
+  <div class="section">
+    <h2>Popular Videos Ranking</h2>
+    <div style="overflow-x:auto;">
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Thumbnail</th>
+            <th>Title</th>
+            <th style="text-align:right">Views</th>
+            <th style="text-align:right">Likes</th>
+            <th>Published</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=RvElw4H0D4E','_blank')">
+          <td class="rank-num"><span style="font-size:1.4em">&#x1F947;</span> 1</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/RvElw4H0D4E/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">仏教のこと、龍源さんに聞こう①｜仏教の輪郭をつかむ（全体像）【番外編＃131】</td>
+          <td class="rank-stat">52,554</td>
+          <td class="rank-stat">1,181</td>
+          <td class="rank-date">2026-01-07</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=VDFvRo9nIEQ','_blank')">
+          <td class="rank-num"><span style="font-size:1.4em">&#x1F948;</span> 2</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/VDFvRo9nIEQ/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">仏教のこと、龍源さんに聞こう②｜私は流れでできている（無我）【番外編＃132】</td>
+          <td class="rank-stat">36,318</td>
+          <td class="rank-stat">745</td>
+          <td class="rank-date">2026-01-11</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=vG16ndBtWCs','_blank')">
+          <td class="rank-num"><span style="font-size:1.4em">&#x1F949;</span> 3</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/vG16ndBtWCs/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">THIS IS AMERICA｜自由を夢見たリンカンの旅路【62-1 COTEN RADIO リンカン編1】</td>
+          <td class="rank-stat">34,464</td>
+          <td class="rank-stat">488</td>
+          <td class="rank-date">2025-10-29</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=jvWJvDQfxBM','_blank')">
+          <td class="rank-num">4</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/jvWJvDQfxBM/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">推し活の世界 ― 変化と熱狂が紡ぐハロプロ界隈　ゲスト：LINEヤフー会長 川邊健太郎氏【番外編＃130】</td>
+          <td class="rank-stat">32,313</td>
+          <td class="rank-stat">748</td>
+          <td class="rank-date">2025-12-21</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=l1lrWzYtTe4','_blank')">
+          <td class="rank-num">5</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/l1lrWzYtTe4/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">仏教のこと、龍源さんに聞こう③｜世界は心に映っている（唯識）【番外編＃133】</td>
+          <td class="rank-stat">32,016</td>
+          <td class="rank-stat">594</td>
+          <td class="rank-date">2026-01-14</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=EwIcNSVzBwk','_blank')">
+          <td class="rank-num">6</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/EwIcNSVzBwk/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">怒る？スルー？あきらめる？40歳・深井龍之介のイライラ白書【番外編＃129】</td>
+          <td class="rank-stat">27,208</td>
+          <td class="rank-stat">567</td>
+          <td class="rank-date">2025-10-19</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=SPATi-YQ-O8','_blank')">
+          <td class="rank-num">7</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/SPATi-YQ-O8/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">信仰は我らが命！アメリカをかたどる宗教の枠組み 〜皆を束ねる未来への約束〜【62-2 COTEN RADIO リンカン編2】</td>
+          <td class="rank-stat">26,838</td>
+          <td class="rank-stat">347</td>
+          <td class="rank-date">2025-11-02</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=chXJWE1M40E','_blank')">
+          <td class="rank-num">8</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/chXJWE1M40E/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">【特別編】株式会社COTENの新たな挑戦。ジェンダーギャップ解消のための音源プラットフォーム公開について</td>
+          <td class="rank-stat">22,664</td>
+          <td class="rank-stat">738</td>
+          <td class="rank-date">2025-11-13</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=bzBTz4797KE','_blank')">
+          <td class="rank-num">9</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/bzBTz4797KE/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">誰が始めた？誰が止める？奴隷制という時限爆弾 〜南北にヒビがビビビッ〜【62-4 COTEN RADIO リンカン編4】</td>
+          <td class="rank-stat">20,651</td>
+          <td class="rank-stat">304</td>
+          <td class="rank-date">2025-11-09</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=rtwt3ZzrOXY','_blank')">
+          <td class="rank-num">10</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/rtwt3ZzrOXY/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">意味なくライブ配信</td>
+          <td class="rank-stat">18,648</td>
+          <td class="rank-stat">399</td>
+          <td class="rank-date">2025-09-22</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=KQOpTaziHac','_blank')">
+          <td class="rank-num">11</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/KQOpTaziHac/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">まるでオープンワールド！広がる領土と奴隷制の不安 〜議員による問題先送り〜【62-5 COTEN RADIO リンカン編5】</td>
+          <td class="rank-stat">18,572</td>
+          <td class="rank-stat">267</td>
+          <td class="rank-date">2025-11-12</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=36DMQBoNPB0','_blank')">
+          <td class="rank-num">12</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/36DMQBoNPB0/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">我々ガチ勢です！貴重な時間が何かに変わるゲームの魔力【番外編＃127】</td>
+          <td class="rank-stat">17,876</td>
+          <td class="rank-stat">308</td>
+          <td class="rank-date">2025-10-12</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=9re-pU7rQtQ','_blank')">
+          <td class="rank-num">13</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/9re-pU7rQtQ/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">やられっぱなしじゃねぇ！奴隷たちの意地と抵抗 〜秘密のアングラ組織爆誕〜【62-7 COTEN RADIO リンカン編7】</td>
+          <td class="rank-stat">16,664</td>
+          <td class="rank-stat">288</td>
+          <td class="rank-date">2025-11-19</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=sjNq9GSYGgE','_blank')">
+          <td class="rank-num">14</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/sjNq9GSYGgE/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">ダメなもんはダメ！奴隷制をめぐる路線対立の激化 〜共和党誕生に潜む抗争劇〜【62-10 COTEN RADIO リンカン編10】</td>
+          <td class="rank-stat">15,913</td>
+          <td class="rank-stat">236</td>
+          <td class="rank-date">2025-11-30</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=Xq9fwTTt078','_blank')">
+          <td class="rank-num">15</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/Xq9fwTTt078/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">やったれ新大統領！嵐を呼ぶ苛烈な南北戦争 〜奴隷制を凌ぐ連邦維持の誓い〜【62-12 COTEN RADIO リンカン編12】</td>
+          <td class="rank-stat">14,414</td>
+          <td class="rank-stat">256</td>
+          <td class="rank-date">2025-12-07</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=Jc4PGQJi9uU','_blank')">
+          <td class="rank-num">16</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/Jc4PGQJi9uU/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">奴隷増員！アメリカ南部をのみこむ綿花需要 〜豊かさとかなしき代償〜【62-6 COTEN RADIO リンカン編6】</td>
+          <td class="rank-stat">14,185</td>
+          <td class="rank-stat">251</td>
+          <td class="rank-date">2025-11-16</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=DPaBhcIMBhs','_blank')">
+          <td class="rank-num">17</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/DPaBhcIMBhs/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">いきなりまぼろし会議</td>
+          <td class="rank-stat">14,072</td>
+          <td class="rank-stat">342</td>
+          <td class="rank-date">2025-11-06</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=uaZ5kFSzzVg','_blank')">
+          <td class="rank-num">18</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/uaZ5kFSzzVg/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">自由よ！平等よ！奴隷解放宣言とゲティスバーグ演説 〜犠牲者に捧ぐ愛国心〜【62-13 COTEN RADIO リンカン編13】</td>
+          <td class="rank-stat">13,717</td>
+          <td class="rank-stat">270</td>
+          <td class="rank-date">2025-12-10</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=DSOShZu5iAs','_blank')">
+          <td class="rank-num">19</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/DSOShZu5iAs/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">労働の誇りを胸に！駆け出し政治家リンカンがゆく 〜きらきら汗が叶える自由〜【62-9 COTEN RADIO リンカン編9】</td>
+          <td class="rank-stat">12,556</td>
+          <td class="rank-stat">216</td>
+          <td class="rank-date">2025-11-26</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=qADgd6Cfpa8','_blank')">
+          <td class="rank-num">20</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/qADgd6Cfpa8/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">リンカンが撃たれた！ 自由を貫く大統領の最期 〜南北戦争の終わりに〜【62-14 COTEN RADIO リンカン編14】</td>
+          <td class="rank-stat">11,918</td>
+          <td class="rank-stat">249</td>
+          <td class="rank-date">2025-12-14</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=vqxmxY0whBY','_blank')">
+          <td class="rank-num">21</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/vqxmxY0whBY/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">電！磁！力！交流で世界を回したい男 〜じわじわキテる次のジョーシキ〜【61-5 COTEN RADIOショート ニコラ・テスラ編5】</td>
+          <td class="rank-stat">11,484</td>
+          <td class="rank-stat">209</td>
+          <td class="rank-date">2025-09-24</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=G1O-K4-L0xY','_blank')">
+          <td class="rank-num">22</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/G1O-K4-L0xY/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">世界最古の神話！メソポタミアと神々の誕生 〜混沌からの天地創造〜【63-2 COTEN RADIOショート ギルガメシュ編2】</td>
+          <td class="rank-stat">10,179</td>
+          <td class="rank-stat">251</td>
+          <td class="rank-date">2026-01-28</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=evk9xZfnrUM','_blank')">
+          <td class="rank-num">23</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/evk9xZfnrUM/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">Endless Light｜消灯時刻を迎えた電気の魔術師 〜それでも消えぬ街の灯〜【61-8 COTEN RADIOショート ニコラ・テスラ編8】</td>
+          <td class="rank-stat">9,779</td>
+          <td class="rank-stat">237</td>
+          <td class="rank-date">2025-10-05</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=rP2ItdaZ03c','_blank')">
+          <td class="rank-num">24</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/rP2ItdaZ03c/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">100まんボルトだ！命を賭した電流頂上決戦 〜規格ひとつで変わるセカイ〜【61-7 COTEN RADIOショート ニコラ・テスラ編7】</td>
+          <td class="rank-stat">9,127</td>
+          <td class="rank-stat">197</td>
+          <td class="rank-date">2025-10-01</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=EvK0V_9-uJc','_blank')">
+          <td class="rank-num">25</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/EvK0V_9-uJc/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">技術たのしい！凸凹ふたりのショート雑談 〜3Dプリンターと自己肯定感〜【番外編＃126】</td>
+          <td class="rank-stat">7,227</td>
+          <td class="rank-stat">181</td>
+          <td class="rank-date">2025-10-08</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=nlsT11FzMWA','_blank')">
+          <td class="rank-num">26</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/nlsT11FzMWA/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">森に潜む恐怖！怪物フンババ討伐クエスト 〜エンキドゥとの二人三脚〜【63-4 COTEN RADIOショート ギルガメシュ編4】</td>
+          <td class="rank-stat">6,498</td>
+          <td class="rank-stat">168</td>
+          <td class="rank-date">2026-02-04</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=oY6q-cL2_Tc','_blank')">
+          <td class="rank-num">27</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/oY6q-cL2_Tc/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">西郷隆盛収録終了後ライブ配信</td>
+          <td class="rank-stat">6,366</td>
+          <td class="rank-stat">174</td>
+          <td class="rank-date">2025-09-30</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=3XPBUaBdha4','_blank')">
+          <td class="rank-num">28</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/3XPBUaBdha4/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">だが断る！逆プロポーズぶった斬り事件 〜怒れる女神イシュタルの報復〜【63-5 COTEN RADIOショート ギルガメシュ編5】</td>
+          <td class="rank-stat">4,792</td>
+          <td class="rank-stat">133</td>
+          <td class="rank-date">2026-02-08</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=PgbOk0rBCos','_blank')">
+          <td class="rank-num">29</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/PgbOk0rBCos/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">【告知】アニュアルレポート2025の販売を開始します</td>
+          <td class="rank-stat">4,532</td>
+          <td class="rank-stat">134</td>
+          <td class="rank-date">2026-02-13</td>
+        </tr>
+        <tr class="rank-row" onclick="window.open('https://www.youtube.com/watch?v=5I21te0UP7E','_blank')">
+          <td class="rank-num">30</td>
+          <td class="rank-thumb"><img src="https://i.ytimg.com/vi/5I21te0UP7E/mqdefault.jpg" alt="" loading="lazy"></td>
+          <td class="rank-title">「忘れないでね僕のことを」ふたりを分かつ神々の宣告 〜君がくれたもの【63-6 COTEN RADIOショート ギルガメシュ編6】</td>
+          <td class="rank-stat">3,992</td>
+          <td class="rank-stat">130</td>
+          <td class="rank-date">2026-02-11</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    Generated at 2026-02-15 19:44 &mdash; YouTube Channel Report Generator
+  </div>
+
+</div>
+
+<script>
+const labels = ["2025-09-22", "2025-09-24", "2025-09-30", "2025-10-01", "2025-10-05", "2025-10-08", "2025-10-12", "2025-10-19", "2025-10-29", "2025-11-02", "2025-11-06", "2025-11-09", "2025-11-12", "2025-11-13", "2025-11-16", "2025-11-19", "2025-11-26", "2025-11-30", "2025-12-07", "2025-12-10", "2025-12-14", "2025-12-21", "2026-01-07", "2026-01-11", "2026-01-14", "2026-01-28", "2026-02-04", "2026-02-08", "2026-02-11", "2026-02-13"];
+const views = [18648, 11484, 6366, 9127, 9779, 7227, 17876, 27208, 34464, 26838, 14072, 20651, 18572, 22664, 14185, 16664, 12556, 15913, 14414, 13717, 11918, 32313, 52554, 36318, 32016, 10179, 6498, 4792, 3992, 4532];
+const likes = [399, 209, 174, 197, 237, 181, 308, 567, 488, 347, 342, 304, 267, 738, 251, 288, 216, 236, 256, 270, 249, 748, 1181, 745, 594, 251, 168, 133, 130, 134];
+const titles = ["意味なくライブ配信", "電！磁！力！交流で世界を回したい男 〜じわじわキテる次のジョーシキ〜【61-5 COTEN RADIOショート ニコラ・テスラ編5】", "西郷隆盛収録終了後ライブ配信", "100まんボルトだ！命を賭した電流頂上決戦 〜規格ひとつで変わるセカイ〜【61-7 COTEN RADIOショート ニコラ・テスラ編7】", "Endless Light｜消灯時刻を迎えた電気の魔術師 〜それでも消えぬ街の灯〜【61-8 COTEN RADIOショート ニコラ・テスラ編8】", "技術たのしい！凸凹ふたりのショート雑談 〜3Dプリンターと自己肯定感〜【番外編＃126】", "我々ガチ勢です！貴重な時間が何かに変わるゲームの魔力【番外編＃127】", "怒る？スルー？あきらめる？40歳・深井龍之介のイライラ白書【番外編＃129】", "THIS IS AMERICA｜自由を夢見たリンカンの旅路【62-1 COTEN RADIO リンカン編1】", "信仰は我らが命！アメリカをかたどる宗教の枠組み 〜皆を束ねる未来への約束〜【62-2 COTEN RADIO リンカン編2】", "いきなりまぼろし会議", "誰が始めた？誰が止める？奴隷制という時限爆弾 〜南北にヒビがビビビッ〜【62-4 COTEN RADIO リンカン編4】", "まるでオープンワールド！広がる領土と奴隷制の不安 〜議員による問題先送り〜【62-5 COTEN RADIO リンカン編5】", "【特別編】株式会社COTENの新たな挑戦。ジェンダーギャップ解消のための音源プラットフォーム公開について", "奴隷増員！アメリカ南部をのみこむ綿花需要 〜豊かさとかなしき代償〜【62-6 COTEN RADIO リンカン編6】", "やられっぱなしじゃねぇ！奴隷たちの意地と抵抗 〜秘密のアングラ組織爆誕〜【62-7 COTEN RADIO リンカン編7】", "労働の誇りを胸に！駆け出し政治家リンカンがゆく 〜きらきら汗が叶える自由〜【62-9 COTEN RADIO リンカン編9】", "ダメなもんはダメ！奴隷制をめぐる路線対立の激化 〜共和党誕生に潜む抗争劇〜【62-10 COTEN RADIO リンカン編10】", "やったれ新大統領！嵐を呼ぶ苛烈な南北戦争 〜奴隷制を凌ぐ連邦維持の誓い〜【62-12 COTEN RADIO リンカン編12】", "自由よ！平等よ！奴隷解放宣言とゲティスバーグ演説 〜犠牲者に捧ぐ愛国心〜【62-13 COTEN RADIO リンカン編13】", "リンカンが撃たれた！ 自由を貫く大統領の最期 〜南北戦争の終わりに〜【62-14 COTEN RADIO リンカン編14】", "推し活の世界 ― 変化と熱狂が紡ぐハロプロ界隈　ゲスト：LINEヤフー会長 川邊健太郎氏【番外編＃130】", "仏教のこと、龍源さんに聞こう①｜仏教の輪郭をつかむ（全体像）【番外編＃131】", "仏教のこと、龍源さんに聞こう②｜私は流れでできている（無我）【番外編＃132】", "仏教のこと、龍源さんに聞こう③｜世界は心に映っている（唯識）【番外編＃133】", "世界最古の神話！メソポタミアと神々の誕生 〜混沌からの天地創造〜【63-2 COTEN RADIOショート ギルガメシュ編2】", "森に潜む恐怖！怪物フンババ討伐クエスト 〜エンキドゥとの二人三脚〜【63-4 COTEN RADIOショート ギルガメシュ編4】", "だが断る！逆プロポーズぶった斬り事件 〜怒れる女神イシュタルの報復〜【63-5 COTEN RADIOショート ギルガメシュ編5】", "「忘れないでね僕のことを」ふたりを分かつ神々の宣告 〜君がくれたもの【63-6 COTEN RADIOショート ギルガメシュ編6】", "【告知】アニュアルレポート2025の販売を開始します"];
+
+const commonOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  interaction: {
+    mode: 'index',
+    intersect: false,
+  },
+  plugins: {
+    tooltip: {
+      callbacks: {
+        title: (items) => titles[items[0].dataIndex],
+        label: (item) => item.dataset.label + ': ' + item.raw.toLocaleString(),
+      },
+      backgroundColor: 'rgba(26,26,46,0.95)',
+      titleFont: { size: 13 },
+      bodyFont: { size: 12 },
+      padding: 12,
+      cornerRadius: 8,
+    },
+    legend: {
+      labels: { color: '#eaeaea' },
+    },
+  },
+  scales: {
+    x: {
+      ticks: { color: '#a0a0b0', maxRotation: 45, font: { size: 10 } },
+      grid: { color: 'rgba(255,255,255,0.05)' },
+    },
+    y: {
+      ticks: {
+        color: '#a0a0b0',
+        callback: (v) => v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1e3 ? (v/1e3).toFixed(0)+'K' : v,
+      },
+      grid: { color: 'rgba(255,255,255,0.05)' },
+    },
+  },
+};
+
+new Chart(document.getElementById('viewChart'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      label: 'Views',
+      data: views,
+      backgroundColor: 'rgba(91,192,235,0.6)',
+      borderColor: 'rgba(91,192,235,1)',
+      borderWidth: 1,
+      borderRadius: 4,
+    }, {
+      label: 'Trend',
+      data: views,
+      type: 'line',
+      borderColor: '#1a6fb5',
+      borderWidth: 2,
+      pointRadius: 3,
+      pointBackgroundColor: '#1a6fb5',
+      tension: 0.3,
+      fill: false,
+    }],
+  },
+  options: commonOptions,
+});
+
+new Chart(document.getElementById('likeChart'), {
+  type: 'line',
+  data: {
+    labels,
+    datasets: [{
+      label: 'Likes',
+      data: likes,
+      borderColor: '#7ec8e3',
+      backgroundColor: 'rgba(126,200,227,0.15)',
+      borderWidth: 2,
+      pointRadius: 4,
+      pointBackgroundColor: '#7ec8e3',
+      tension: 0.3,
+      fill: true,
+    }],
+  },
+  options: commonOptions,
+});
+</script>
+</body>
+</html>
