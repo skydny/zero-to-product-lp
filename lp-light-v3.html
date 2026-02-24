@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZERO to PRODUCT | 非エンジニアが1ヶ月で業務の数字を動かすAI研修</title>
+    <meta name="description" content="作って終わりじゃない。業務効率・成約率・処理速度——自分の業務指標がどう改善したかを可視化する、全4回の伴走型AI開発研修。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #f8f8fc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f0f0f8;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --text-muted: #8a8aaa;
+            --accent-blue: #3a6ee8;
+            --accent-purple: #7c3aed;
+            --accent-gradient: linear-gradient(135deg, #3a6ee8, #7c3aed);
+            --accent-gradient-hover: linear-gradient(135deg, #4f8cff, #8b5cf6);
+            --border-color: #e0e0f0;
+            --success: #16a34a;
+            --font-main: 'Noto Sans JP', sans-serif;
+            --max-width: 1100px;
+            --header-height: 64px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+        body { font-family: var(--font-main); background: var(--bg-dark); color: var(--text-primary); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+        .section { padding: 80px 0; }
+        .section-label { display: inline-block; font-size: 1rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 12px; }
+        .section-title { font-size: 2rem; font-weight: 900; line-height: 1.4; margin-bottom: 16px; }
+        .section-subtitle { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 48px; max-width: 640px; }
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+
+        .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .cta-btn { display: inline-block; padding: 16px 40px; background: var(--accent-gradient); color: #fff; font-size: 1.25rem; font-weight: 700; border-radius: 50px; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(58,110,232,0.25); }
+        .cta-btn-outline { display: inline-block; padding: 14px 36px; background: transparent; color: var(--accent-blue); font-size: 1.2rem; font-weight: 700; border-radius: 50px; border: 2px solid var(--accent-blue); cursor: pointer; transition: background 0.2s, color 0.2s; }
+        .cta-btn-outline:hover { background: var(--accent-blue); color: #fff; }
+
+        /* ナビゲーション */
+        .header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: rgba(248,248,252,0.92); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--border-color); }
+        .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: 0.04em; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-size: 1.125rem; font-weight: 500; color: var(--text-secondary); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: rgba(248,248,252,0.98); backdrop-filter: blur(12px); padding: 24px 20px; border-bottom: 1px solid var(--border-color); z-index: 999; }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 14px 0; font-size: 1.25rem; font-weight: 500; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+        .mobile-menu a:last-child { border-bottom: none; }
+
+        /* ヒーロー */
+        .hero { padding-top: calc(var(--header-height) + 80px); padding-bottom: 80px; position: relative; overflow: hidden; background: linear-gradient(160deg, #f0f4ff 0%, #f8f8fc 60%, #faf0ff 100%); }
+        .hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(58,110,232,0.07) 0%, rgba(124,58,237,0.04) 40%, transparent 70%); pointer-events: none; }
+        .hero .container { position: relative; text-align: center; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(58,110,232,0.08); border: 1px solid rgba(58,110,232,0.2); border-radius: 50px; padding: 8px 20px; font-size: 1.05rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 32px; }
+        .hero-badge::before { content: '✦'; }
+        .hero-title { font-size: 2.75rem; font-weight: 900; line-height: 1.3; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .hero-title .gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-sub { font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 40px; line-height: 1.8; }
+        .hero-metrics { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0 28px; }
+        .hero-metric-tag { background: rgba(58,110,232,0.1); border: 1px solid rgba(58,110,232,0.25); border-radius: 50px; padding: 6px 20px; font-size: 1.05rem; font-weight: 700; color: var(--accent-blue); }
+        .hero-cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* 課題 */
+        .problems { background: #ffffff; }
+        .problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .problem-card { background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px 28px; transition: border-color 0.3s, box-shadow 0.3s; }
+        .problem-card:hover { border-color: rgba(58,110,232,0.3); box-shadow: 0 4px 20px rgba(58,110,232,0.08); }
+        .problem-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+        .problem-card p { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* タイムライン */
+        .program { background: linear-gradient(180deg, #f8f8fc 0%, #f0f4ff 100%); }
+        .timeline { position: relative; max-width: 700px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple)); border-radius: 2px; }
+        .timeline-item { position: relative; padding-left: 64px; padding-bottom: 40px; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-dot { position: absolute; left: 15px; top: 4px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-gradient); border: 3px solid #f0f4ff; }
+        .timeline-item.special .timeline-dot { box-shadow: 0 0 12px rgba(58,110,232,0.4); }
+        .timeline-item.special .timeline-content { border-color: rgba(58,110,232,0.3); background: rgba(58,110,232,0.04); }
+        .timeline-step { font-size: 1rem; font-weight: 700; color: var(--accent-blue); letter-spacing: 0.08em; margin-bottom: 4px; }
+        .timeline-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(58,110,232,0.06); }
+        .timeline-content h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+        .timeline-content p { font-size: 1.125rem; color: var(--text-secondary); }
+        .special-badge { display: inline-block; font-size: 0.95rem; font-weight: 700; background: var(--accent-gradient); color: #fff; padding: 3px 10px; border-radius: 50px; margin-bottom: 8px; }
+        .mid-cta { text-align: center; padding: 48px 0 0; }
+
+        /* WHY US */
+        .why-us { background: #ffffff; }
+        .why-us-quote { font-size: 1.35rem; font-weight: 700; color: var(--text-primary); text-align: center; margin-bottom: 40px; line-height: 1.7; }
+        .why-us-quote span { color: var(--accent-blue); }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .why-card { background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px 28px; }
+        .why-number { font-size: 2rem; font-weight: 900; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; }
+        .why-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+        .why-card p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* 講師 */
+        .authority { background: linear-gradient(180deg, #f8f8fc 0%, #f0f4ff 100%); }
+        .authority-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+        .authority-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 36px 32px; box-shadow: 0 4px 20px rgba(58,110,232,0.06); }
+        .authority-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+        .authority-role { font-size: 1.05rem; color: var(--accent-blue); font-weight: 700; margin-bottom: 16px; }
+        .authority-card p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8; }
+        .client-logos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .client-tag { font-size: 1rem; font-weight: 500; background: rgba(58,110,232,0.08); color: var(--accent-blue); padding: 4px 12px; border-radius: 50px; }
+
+        /* 料金 */
+        .pricing { background: linear-gradient(180deg, #f0f4ff 0%, #f8f8fc 100%); }
+        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 800px; margin: 0 auto; }
+        .pricing-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 36px 32px; position: relative; box-shadow: 0 4px 20px rgba(58,110,232,0.06); }
+        .pricing-card.featured { border-color: var(--accent-blue); box-shadow: 0 0 40px rgba(58,110,232,0.12); }
+        .pricing-popular { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-size: 0.95rem; font-weight: 700; background: var(--accent-gradient); color: #fff; padding: 4px 16px; border-radius: 50px; }
+        .pricing-card h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; }
+        .pricing-amount { font-size: 2.75rem; font-weight: 900; margin-bottom: 4px; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .pricing-amount .yen { font-size: 1.45rem; }
+        .pricing-amount .unit { font-size: 1.15rem; font-weight: 500; color: var(--text-secondary); -webkit-text-fill-color: var(--text-secondary); }
+        .pricing-amount.custom { font-size: 1.9rem; }
+        .pricing-tax { font-size: 1rem; color: var(--text-muted); margin-bottom: 24px; }
+        .pricing-note { font-size: 0.95rem; color: var(--text-muted); margin-top: 16px; line-height: 1.6; }
+        .pricing-features { margin-bottom: 28px; }
+        .pricing-features li { font-size: 1.125rem; color: var(--text-secondary); padding: 8px 0; padding-left: 24px; position: relative; }
+        .pricing-features li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+        .pricing-card .cta-btn { display: block; width: 100%; }
+
+        /* FAQ */
+        .faq { background: #ffffff; }
+        .faq-list { max-width: 720px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--border-color); }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 20px 0; background: none; border: none; color: var(--text-primary); font-size: 1.2rem; font-weight: 700; text-align: left; cursor: pointer; font-family: var(--font-main); line-height: 1.6; }
+        .faq-question::after { content: '+'; font-size: 1.65rem; font-weight: 400; color: var(--accent-blue); flex-shrink: 0; margin-left: 16px; transition: transform 0.3s; }
+        .faq-item.active .faq-question::after { content: '−'; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        .faq-answer-inner { padding-bottom: 20px; font-size: 1.15rem; color: var(--text-secondary); line-height: 1.8; }
+
+        /* 最終CTA */
+        .final-cta { background: linear-gradient(180deg, #f0f4ff 0%, #f8f8fc 100%); padding: 80px 0; }
+        .contact-form { max-width: 560px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px 36px; box-shadow: 0 8px 40px rgba(58,110,232,0.08); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--text-secondary); }
+        .form-group label .required { color: #ef4444; margin-left: 4px; font-size: 1rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px 16px; background: #f8f8fc; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 1.15rem; font-family: var(--font-main); transition: border-color 0.2s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-blue); }
+        .form-group textarea { height: 120px; resize: vertical; }
+        .contact-form .cta-btn { display: block; width: 100%; font-family: var(--font-main); }
+
+        /* フッター */
+        .footer { background: #1a1a2e; border-top: 1px solid #2a2a4a; padding: 40px 0; text-align: center; color: #ffffff; }
+        .footer-company { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+        .footer-info { font-size: 1rem; color: #b0b0c8; margin-bottom: 16px; }
+        .footer-copy { font-size: 0.95rem; color: #7a7a9a; }
+
+        .mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(248,248,252,0.95); backdrop-filter: blur(12px); padding: 12px 16px; z-index: 998; border-top: 1px solid var(--border-color); box-shadow: 0 -4px 20px rgba(58,110,232,0.1); }
+        .mobile-cta-bar .cta-btn { display: block; width: 100%; padding: 14px 20px; font-size: 1.2rem; }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .section { padding: 56px 0; }
+            .section-title { font-size: 1.65rem; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero { padding-top: calc(var(--header-height) + 48px); padding-bottom: 56px; }
+            .hero-title { font-size: 1.95rem; }
+            .hero-sub { font-size: 1.2rem; }
+            .problem-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 16px; }
+            .timeline-item { padding-left: 48px; }
+            .timeline-dot { left: 7px; width: 18px; height: 18px; }
+            .authority-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .contact-form { padding: 28px 20px; }
+            .mobile-cta-bar { display: block; }
+            .footer { padding-bottom: 80px; }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.7rem; }
+            .pricing-amount { font-size: 2.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ナビゲーション -->
+<header class="header">
+    <div class="container">
+        <a href="#" class="logo">ZERO to PRODUCT</a>
+        <nav class="nav-links">
+            <a href="#program">プログラム</a>
+            <a href="#pricing">料金</a>
+            <a href="#authority">講師紹介</a>
+            <a href="#contact">お問い合わせ</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#program" class="mobile-menu-link">プログラム</a>
+    <a href="#pricing" class="mobile-menu-link">料金</a>
+    <a href="#authority" class="mobile-menu-link">講師紹介</a>
+    <a href="#contact" class="mobile-menu-link">お問い合わせ</a>
+</div>
+
+<!-- ヒーロー -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">伴走型AI開発研修 20社以上の導入実績</div>
+        <h1 class="hero-title">
+            非エンジニアが、<br><span class="gradient-text">1ヶ月で業務の数字を動かす。</span>
+        </h1>
+        <p class="hero-sub">
+            作って終わりじゃない。<br>
+            「使えた」より「数字が変わった」で終わる、<br>
+            全4回の伴走型AI開発研修。
+        </p>
+        <div class="hero-cta-group">
+            <a href="#contact" class="cta-btn">無料相談を予約する</a>
+            <a href="#program" class="cta-btn-outline">プログラムを見る</a>
+        </div>
+    </div>
+</section>
+
+<!-- 課題提起 -->
+<section class="section problems">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Problem</span>
+            <h2 class="section-title">こんな壁、ありませんか？</h2>
+            <img src="illust_trouble.png" alt="" style="width:160px;height:auto;margin:0 auto 32px;display:block;opacity:0.85;">
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card fade-in">
+                <h3>Claude CodeもAntigravityも、設定の段階で毎回止まる</h3>
+                <p>試してみたが、セットアップで詰まりターミナルを見た瞬間閉じた。結局また使わないまま終わる。</p>
+            </div>
+            <div class="problem-card fade-in">
+                <h3>エラーが出た瞬間、完全に止まる</h3>
+                <p>何かを作りかけても、エラーが出た時の対処法がわからない。そこから先に進めない。</p>
+            </div>
+            <div class="problem-card fade-in">
+                <h3>エンジニアに頼むたびに「要件が曖昧」と言われる</h3>
+                <p>なぜ毎回こんなに時間がかかるのか。自分で作れたら、そのやり取りが全部いらなくなる。</p>
+            </div>
+            <div class="problem-card fade-in">
+                <h3>モックを作るのに、エンジニアの工数を使っている</h3>
+                <p>アイデアを試すだけで数日かかる。10分で動くものが作れるなら、意思決定のスピードが変わる。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- プログラム -->
+<section class="section program" id="program">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Program</span>
+            <h2 class="section-title">全4回・1ヶ月の伴走型プログラム</h2>
+            <p class="section-subtitle mx-auto">座学だけでなく、実際の業務課題をテーマに開発を進めます。<br>1on1サポートで確実に定着させます。</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <span class="timeline-step">第1回</span>
+                <div class="timeline-content">
+                    <h3>プロダクト視点レクチャー＋AI開発基礎</h3>
+                    <p>プロダクト視点をインストール後、Claude Code・Antigravity・Geminiの基本を習得。ターミナルの壁もこの日に越えます。</p>
+                </div>
+            </div>
+            <div class="timeline-item special fade-in">
+                <div class="timeline-dot"></div>
+                <span class="timeline-step">特別サポート</span>
+                <div class="timeline-content">
+                    <span class="special-badge">1on1 フォローアップ</span>
+                    <h3>ツールセットアップ確認</h3>
+                    <p>環境を個別確認し、詰まりポイントをその場で解消します。</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <span class="timeline-step">第2〜3回</span>
+                <div class="timeline-content">
+                    <h3>自社業務用アプリ・システム開発</h3>
+                    <p>自分の業務課題をテーマに開発。エラーが出ても伴走しながら前に進みます。</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <span class="timeline-step">第4回</span>
+                <div class="timeline-content">
+                    <h3>プロダクト発表＋講評レビュー</h3>
+                    <p>完成物を発表し、業務指標の改善を言語化。実務レベルに仕上げて終わります。</p>
+                </div>
+            </div>
+        </div>
+        <div class="mid-cta fade-in">
+            <a href="#contact" class="cta-btn">無料相談を予約する</a>
+        </div>
+    </div>
+</section>
+
+<!-- WHY US -->
+<section class="section why-us" id="comparison">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Why Us</span>
+            <h2 class="section-title">なぜ「伴走型」なのか</h2>
+        </div>
+        <p class="why-us-quote fade-in">
+            1日で学んだことの<span>70%</span>は翌日に忘れる。<br>だからこそ、<span>1ヶ月</span>かけて定着させる。
+        </p>
+        <div class="why-grid">
+            <div class="why-card fade-in">
+                <div class="why-number">01</div>
+                <h3>業務課題がそのままテーマになる</h3>
+                <p>架空の課題ではなく、自分の業務がそのままテーマ。研修終了後すぐ実務で使えます。</p>
+            </div>
+            <div class="why-card fade-in">
+                <div class="why-number">02</div>
+                <h3>詰まっても止まらない、1on1サポート</h3>
+                <p>詰まっても一人で抱えない。個別サポートで挫折ポイントをその場で解消します。</p>
+            </div>
+            <div class="why-card fade-in">
+                <div class="why-number">03</div>
+                <h3>作って終わりではなく、成果を言語化して終わる</h3>
+                <p>最終回で業務指標の変化を言語化。「なんとなく使えた」で終わらせません。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 講師・運営会社 -->
+<section class="section authority" id="authority">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Instructor</span>
+            <h2 class="section-title">講師・運営会社</h2>
+        </div>
+        <div class="authority-grid">
+            <div class="authority-card fade-in">
+                <img src="kaku.png" alt="郭 翔愛" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:16px;display:block;">
+                <h3>郭 翔愛</h3>
+                <p class="authority-role">センチュリオグループ株式会社 執行役員 / メイン講師</p>
+                <p>マーケティング系上場企業取締役を経て2020年執行役員就任。2024年より生成AIをコンサルワークに実装し、申込率・受注率など業務指標の改善を実体験。伴走型研修20社以上担当。</p>
+            </div>
+            <div class="authority-card fade-in">
+                <img src="tachibana.png" alt="立花 雄樹" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:16px;display:block;">
+                <h3>立花 雄樹</h3>
+                <p class="authority-role">センチュリオグループ株式会社 代表 / プロダクト視点レクチャー・最終講評</p>
+                <p>早稲田大学卒業後、リクルートで史上最年少の執行役員に就任。年間数百本の新規事業・システム構築を経験。本研修では初回レクチャーと最終講評を担当。</p>
+            </div>
+            <div class="authority-card fade-in">
+                <img src="logo.png" alt="センチュリオグループ株式会社" style="width:80px;height:80px;object-fit:contain;margin-bottom:16px;display:block;">
+                <h3>センチュリオグループ株式会社</h3>
+                <p class="authority-role">運営会社</p>
+                <p>AI活用支援・DX推進を手がけるコンサルティング企業。大手企業との取引実績多数。</p>
+                <div class="client-logos">
+                    <span class="client-tag">リクルート</span>
+                    <span class="client-tag">メルカリ</span>
+                    <span class="client-tag">ベネッセ</span>
+                    <span class="client-tag">その他多数</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 料金プラン -->
+<section class="section pricing" id="pricing">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Pricing</span>
+            <h2 class="section-title">料金プラン</h2>
+            <p class="section-subtitle mx-auto">目的に合わせて2つのプランをご用意しています。</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card featured fade-in">
+                <span class="pricing-popular">人気</span>
+                <h3>個人受講プラン</h3>
+                <div class="pricing-amount">
+                    <span class="yen">¥</span>200,000<span class="unit"> / 名</span>
+                </div>
+                <p class="pricing-tax">税別</p>
+                <ul class="pricing-features">
+                    <li>全4回の講座（1ヶ月間）</li>
+                    <li>1on1フォローアップ付き</li>
+                    <li>最終回の講評レビュー</li>
+                    <li>オンライン受講</li>
+                    <li>講座後1ヶ月間の質問サポート</li>
+                </ul>
+                <a href="#contact" class="cta-btn">無料相談を予約する</a>
+            </div>
+            <div class="pricing-card fade-in">
+                <h3>集合研修プラン</h3>
+                <div class="pricing-amount custom">別途お見積り</div>
+                <p class="pricing-tax">人数・内容に応じてカスタマイズ</p>
+                <ul class="pricing-features">
+                    <li>チーム・部署単位で受講</li>
+                    <li>カリキュラムのカスタマイズ</li>
+                    <li>社内課題に合わせた開発テーマ</li>
+                    <li>オンライン対応</li>
+                    <li>人材開発支援助成金の制度案内付き</li>
+                </ul>
+                <a href="#contact" class="cta-btn-outline" style="display:block;width:100%;text-align:center;">お問い合わせ</a>
+                <p class="pricing-note">※助成金の申請実務支援は含まれません。対象要件など一般情報をマニュアルにてご提供します。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">FAQ</span>
+            <h2 class="section-title">よくあるご質問</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item fade-in">
+                <button class="faq-question">プログラミング未経験でも参加できますか？</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">はい、むしろ未経験の方を想定したプログラムです。ターミナルの操作やClaude Codeのセットアップから丁寧にサポートします。「黒い画面を見ただけで閉じてしまった」という方が、1ヶ月後に自分の業務アプリを完成させています。</div>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">どのようなアプリ・システムが開発できますか？</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">受講者自身の業務課題をテーマに開発するため、内容は人によって異なります。これまでの例では、YouTubeチャンネル比較分析ツール・日報自動生成ツール・顧客対応Bot・売上集計ダッシュボードなどがあります。「自分の業務のどこを改善したいか」をテーマに設定するので、研修終了後すぐに実務で使えます。</div>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">オンラインでも受講できますか？</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">本プログラムはオンライン完結型です。リアルタイムで伴走しますので、詰まった時のサポート体制も対面と変わりません。</div>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">助成金は活用できますか？</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">人材開発支援助成金の対象となる可能性があります。お申し込み時に制度概要・対象要件をまとめたマニュアルをご提供します。なお申請実務のサポートは含まれませんので、申請手続きは各社にてお願いします。</div>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">受講に必要な準備物はありますか？</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">インターネットに接続できるPCをご用意ください。ソフトウェアのインストールや環境設定は、第1回の講座内および1on1フォローアップで一緒に行います。事前に準備いただく必要はありません。</div>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">講座終了後のサポートはありますか？</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">講座終了後1ヶ月間、質問サポートをご利用いただけます。開発を続ける中で出てきた疑問やエラーにもお答えします。</div>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">1名から申し込みできますか？</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">はい、個人受講プランは1名から承っています。チーム・部署単位でのご受講は集合研修プランをご利用ください。</div>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <button class="faq-question">ターミナルやClaude Codeの設定が不安です。</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">その不安、このプログラムで解消します。第1回の講座でセットアップを一緒に行い、その後の1on1フォローアップで環境を個別確認します。エラーが出ても止まらない進め方を、伴走しながら身につけます。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 最終CTA + フォーム -->
+<section class="section final-cta" id="contact">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Contact</span>
+            <h2 class="section-title">まずは無料相談から</h2>
+            <p class="section-subtitle mx-auto">貴社の課題に合わせたプログラムをご提案します。<br>お気軽にお問い合わせください。</p>
+        </div>
+        <form class="contact-form fade-in" id="contactForm">
+            <div class="form-group">
+                <label>お名前<span class="required">*</span></label>
+                <input type="text" name="name" required placeholder="山田 太郎">
+            </div>
+            <div class="form-group">
+                <label>会社名<span class="required">*</span></label>
+                <input type="text" name="company" required placeholder="株式会社〇〇">
+            </div>
+            <div class="form-group">
+                <label>メールアドレス<span class="required">*</span></label>
+                <input type="email" name="email" required placeholder="example@company.co.jp">
+            </div>
+            <div class="form-group">
+                <label>ご相談内容</label>
+                <textarea name="message" placeholder="受講人数、ご希望の時期、気になる点など、お気軽にご記入ください。"></textarea>
+            </div>
+            <button type="submit" class="cta-btn">送信する</button>
+        </form>
+    </div>
+</section>
+
+<!-- フッター -->
+<footer class="footer">
+    <div class="container">
+        <p class="footer-company">センチュリオグループ株式会社</p>
+        <p class="footer-info">法人向けAI活用支援・DX推進コンサルティング</p>
+        <p class="footer-copy">&copy; 2026 Centurio Group. All rights reserved.</p>
+    </div>
+</footer>
+
+<div class="mobile-cta-bar" id="mobileCta">
+    <a href="#contact" class="cta-btn">無料相談を予約する</a>
+</div>
+
+<script>
+    // ハンバーガーメニュー
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    });
+    document.querySelectorAll('.mobile-menu-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
+    });
+
+    // フェードイン
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    fadeElements.forEach(el => fadeObserver.observe(el));
+
+    // FAQアコーディオン
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.parentElement;
+            const answer = item.querySelector('.faq-answer');
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+                activeItem.classList.remove('active');
+                activeItem.querySelector('.faq-answer').style.maxHeight = null;
+            });
+            if (!isActive) {
+                item.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        });
+    });
+
+    // フォーム送信
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const company = form.company.value;
+        const email = form.email.value;
+        const message = form.message.value;
+        const subject = encodeURIComponent(`【ZERO to PRODUCT】お問い合わせ - ${company} ${name}様`);
+        const body = encodeURIComponent(`お名前: ${name}\n会社名: ${company}\nメールアドレス: ${email}\n\nご相談内容:\n${message}`);
+        window.location.href = `mailto:info@centurio.co.jp?subject=${subject}&body=${body}`;
+    });
+
+    // スマホ固定CTAバー
+    const mobileCta = document.getElementById('mobileCta');
+    const heroSection = document.querySelector('.hero');
+    const ctaObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            mobileCta.style.display = entry.isIntersecting ? 'none' : 'block';
+        });
+    }, { threshold: 0 });
+    ctaObserver.observe(heroSection);
+</script>
+</body>
+</html>
